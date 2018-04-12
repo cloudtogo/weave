@@ -31,6 +31,7 @@ METRICS_ADDR=${WEAVE_METRICS_ADDR:-0.0.0.0:6782}
 HOST_ROOT=${HOST_ROOT:-/host}
 CONN_LIMIT=${CONN_LIMIT:-100}
 DB_PREFIX=${DB_PREFIX:-/weavedb/weave-net}
+NO_NAT=${NO_NAT:false}
 
 # Check if the IP range overlaps anything existing on the host
 /usr/bin/weaveutil netcheck $IPALLOC_RANGE weave
@@ -156,6 +157,7 @@ post_start_actions &
      --ipalloc-range=$IPALLOC_RANGE $NICKNAME_ARG \
      --ipalloc-init $IPALLOC_INIT \
      --conn-limit=$CONN_LIMIT \
+     --no-nat=$NO_NAT \
      $WEAVE_NPC_OPTS \
      "$@" \
      $KUBE_PEERS
